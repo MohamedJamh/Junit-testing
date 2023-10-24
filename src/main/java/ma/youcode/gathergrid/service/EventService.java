@@ -19,7 +19,7 @@ import java.util.Optional;
 public class EventService {
     private EventRepository eventRepository;
 
-    private List<Error> errors = new ArrayList<>();
+    //private List<Error> errors = new ArrayList<>();
 
     @Inject
     public EventService(EventRepository eventRepository) {
@@ -37,8 +37,8 @@ public class EventService {
 
     public Response<Event> createEvent(Event event){
         Response<Event> eventResponse = new Response<>();
-        validate(event);
-        if(!this.errors.isEmpty()) eventResponse.setError(this.errors);
+        List<Error> errors = validate(event);
+        if(errors.isEmpty()) eventResponse.setError(errors);
         else{
             eventRepository.save(event);
             eventResponse.setResult(event);
@@ -47,12 +47,14 @@ public class EventService {
     }
 
 
-    public void validate(Event event){
+    public List<Error> validate(Event event){
+        List<Error> errors = new ArrayList<>();
         if( event.getName().isEmpty() || event.getLocation().isEmpty() || event.getDescription().isEmpty()){
-            this.errors.add(new Error("All Fields are required"));
+            errors.add(new Error("All Fields are required"));
         }else if(event.getCategory() == null || event.getOrganization() == null){
-            this.errors.add(new Error("Invalid Category or organization"));
-        }else if( event.getNumberOfTicketsAvailable() < 10) this.errors.add(new Error("Invalid Number of places"));
+            errors.add(new Error("Invalid Category or organization"));
+        }else if( event.getNumberOfTicketsAvailable() < 10) errors.add(new Error("Invalid Number of places"));
+        return errors;
     }
 
     public Response<List<Event>> getAllEvents(){
@@ -73,9 +75,10 @@ public class EventService {
     public Response<Event> updateEvent(Event event) {
         Response<Event> eventResponse = new Response<>();
         Optional<Event> optionalEvent =  getEventById(event.getId());
+        List<Error> errors = validate(event);
         if(optionalEvent.isPresent()){
             validate(event);
-            if(!this.errors.isEmpty()) eventResponse.setError(this.errors);
+            if(errors.isEmpty()) eventResponse.setError(errors);
             else {
                 eventRepository.update(event);
                 eventResponse.setResult(event);
