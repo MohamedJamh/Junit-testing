@@ -76,4 +76,20 @@ public class Event {
                 .stream()
                 .reduce(0,(acc, ticketPack) -> acc + ticketPack.getQuantity(), Integer::sum);
     }
+    public List<Error> validate(){
+        List<Error> errors = new ArrayList<>();
+        if( this.getName() == null || this.getName().isEmpty() ||
+            this.getLocation() == null || this.getLocation().isEmpty() ||
+            this.getDescription() == null ||this.getDescription().isEmpty()
+        ){
+            errors.add(new Error("All Fields are required"));
+        }
+        if(this.getCategory() == null || this.getOrganization() == null){
+            errors.add(new Error("Invalid Category or organization"));
+        }
+        if( this.getNumberOfTicketsAvailable() <= 10){
+            errors.add(new Error("Invalid Number of places"));
+        }
+        return errors;
+    }
 }
