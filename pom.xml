@@ -101,6 +101,13 @@
             <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jboss.weld</groupId>
+            <artifactId>weld-junit5</artifactId>
+            <version>4.0.0.Final</version>
+            <scope>test</scope>
+        </dependency>
+
         <!--     <dependency>
                  <groupId>jakarta.json.bind</groupId>
                  <artifactId>jakarta.json.bind-api</artifactId>

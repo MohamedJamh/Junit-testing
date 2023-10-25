@@ -1,6 +1,6 @@
 package ma.youcode.gathergrid.service;
 
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import ma.youcode.gathergrid.domain.Event;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@RequestScoped
+@ApplicationScoped
 @Transactional
 public class EventService {
     private EventRepository eventRepository;
@@ -38,7 +38,7 @@ public class EventService {
     public Response<Event> createEvent(Event event){
         Response<Event> eventResponse = new Response<>();
         List<Error> errors = validate(event);
-        if(errors.isEmpty()) eventResponse.setError(errors);
+        if(!errors.isEmpty()) eventResponse.setError(errors);
         else{
             eventRepository.save(event);
             eventResponse.setResult(event);

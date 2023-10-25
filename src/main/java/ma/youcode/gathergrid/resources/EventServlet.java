@@ -40,7 +40,8 @@ public class EventServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Response<Event> eventResponse = new Response<>();
+        new Response<>();
+        Response<Event> eventResponse;
         switch(req.getParameter("action")){
             case "post" -> {
                 eventResponse = eventService.createEvent(eventBuilder(req));

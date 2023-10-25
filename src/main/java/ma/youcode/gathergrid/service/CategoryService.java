@@ -1,6 +1,6 @@
 package ma.youcode.gathergrid.service;
 
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import ma.youcode.gathergrid.domain.Category;
 import ma.youcode.gathergrid.repositories.CategoryRepository;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@RequestScoped
+@ApplicationScoped
 public class CategoryService {
     private CategoryRepository categoryRepository;
 
