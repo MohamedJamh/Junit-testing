@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -78,16 +79,16 @@ public class Event {
     }
     public List<Error> validate(){
         List<Error> errors = new ArrayList<>();
-        if( this.getName() == null || this.getName().isEmpty()) errors.add(new Error("Name Field are required"));
-        if( this.getLocation() == null || this.getLocation().isEmpty()) errors.add(new Error("Location Field are required"));
-        if( this.getDescription() == null ||this.getDescription().isEmpty()) errors.add(new Error("Description Field are required"));
+        if( this.getName() == null || this.getName().isEmpty()) errors.add(new Error("Name Field is required"));
+        if( this.getLocation() == null || this.getLocation().isEmpty()) errors.add(new Error("Location Field is required"));
+        if( this.getDescription() == null ||this.getDescription().isEmpty()) errors.add(new Error("Description Field is required"));
 
         if(this.getCategory() == null || this.getOrganization() == null){
             errors.add(new Error("Invalid Category or organization"));
         }
-        if( this.getNumberOfTicketsAvailable() <= 10){
-            errors.add(new Error("Invalid Number of places"));
-        }
+        if(this.date == null) errors.add(new Error("Date filed is required"));
+        else if(this.date.before(java.sql.Date.valueOf(LocalDate.now()))) errors.add(new Error("Event date should not be not be old"));
+        if( this.getNumberOfTicketsAvailable() <= 10) errors.add(new Error("Event should have at least 10 places"));
         return errors;
     }
 }
