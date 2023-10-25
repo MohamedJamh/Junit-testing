@@ -14,12 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@ApplicationScoped
 @Transactional
 public class EventService {
     private EventRepository eventRepository;
 
-    //private List<Error> errors = new ArrayList<>();
 
     @Inject
     public EventService(EventRepository eventRepository) {
