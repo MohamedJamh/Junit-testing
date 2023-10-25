@@ -1,6 +1,6 @@
 package ma.youcode.gathergrid.service;
 
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import lombok.NoArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-@RequestScoped
+@ApplicationScoped
 @Transactional
 public class OrganizationService implements IOrganizationService {
 

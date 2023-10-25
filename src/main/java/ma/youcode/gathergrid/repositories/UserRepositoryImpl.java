@@ -1,6 +1,6 @@
 package ma.youcode.gathergrid.repositories;
 
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Model;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -15,7 +15,7 @@ import ma.youcode.gathergrid.domain.User;
 import java.util.List;
 import java.util.Optional;
 
-@RequestScoped
+@ApplicationScoped
 public class UserRepositoryImpl implements UserRepository {
 
 

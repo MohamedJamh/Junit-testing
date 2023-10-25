@@ -1,6 +1,6 @@
 package ma.youcode.gathergrid.repositories;
 
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Model;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -12,7 +12,7 @@ import ma.youcode.gathergrid.domain.Ticket;
 import java.util.List;
 import java.util.Optional;
 
-@RequestScoped
+@ApplicationScoped
 @MyQualifier
 public class TicketRepositoryImpl implements TicketRepository{
     private EntityManager em ;
