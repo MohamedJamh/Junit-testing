@@ -4,6 +4,8 @@ package ma.youcode.gathergrid.resources;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.Time;
+
+import jakarta.enterprise.inject.Default;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.HttpConstraint;
@@ -40,7 +42,8 @@ public class EventServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Response<Event> eventResponse = new Response<>();
+        new Response<>();
+        Response<Event> eventResponse;
         switch(req.getParameter("action")){
             case "post" -> {
                 eventResponse = eventService.createEvent(eventBuilder(req));
