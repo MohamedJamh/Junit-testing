@@ -82,6 +82,6 @@ class EventServiceTest {
         event.setDate(java.sql.Date.valueOf(LocalDate.now().minusDays(20).toString()));
         List<Error> errors = event.validate();
         assertEquals(1,errors.size());
-        assertEquals("Event date should not be not be old",errors.get(0).getMessage());
+        assertEquals("Event date should not be passed",errors.get(0).getMessage());
     }
 }
